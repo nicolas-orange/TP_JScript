@@ -3,33 +3,43 @@
   
   <div class="container">
   <main>
-    <div class="py-2 text-center">
-      <img class="d-block mx-auto mb-2 pull-right" src="https://www.imt.fr/wp-content/uploads/2021/08/logo-imtne.png" alt="">
-      <h2>Annuaire</h2>
-      <p class="lead">Formulaire d'édition d'une personne</p>
+    <div class="py-2 ">
+      <!-- <img class="d-block mx-auto mb-2 pull-right" src="https://www.imt.fr/wp-content/uploads/2021/08/logo-imtne.png" alt="">
+      -->
+      <h2>Annuaire<p class="lead">Formulaire d'édition d'une personne</p></h2>
 
   
     <div v-if="currentPersonne">
-      <div class="form-group">
-    <label for="id">ID</label>
-        <input type="text" readonly class="formcontrol" id="id" v-model="currentPersonne.id" />
+      <div class="form-inline text-center">
+        <div class="form-group">
+          <div class="bg-light form-control square rounded-right px-2">ID </div>
+          <input type="number" readonly class="form-control" id="id" v-model="currentPersonne.id" />
+        </div>
       </div>
-      <div class="form-group">
-    <label for="name">Nom</label>
-        <input type="text" class="" id="name" v-model="currentPersonne.name" />
+      <div class="form-inline text-xs-center">
+        <div class="form-group">
+          <div class="bg-light square form-control rounded-right px-2">NOM </div>
+          <input type="text" class="form-control" id="name" v-model="currentPersonne.name" />
+        </div>
       </div>
-      <div class="form-group">
-    <label for="id">Prenom</label>
-        <input type="text" class="" id="surname" v-model="currentPersonne.surname" />
+      <div class="form-inline text-xs-center">
+        <div class="form-group">
+          <div class="bg-light square form-control rounded-right px-2">Prenom</div>
+        <input type="text" class="form-control" id="surname" v-model="currentPersonne.surname" />
       </div>
-      <div class="form-group">
-    <label for="id">Tel</label>
-        <input type="text" class="" id="phone" v-model="currentPersonne.phone" />
+    </div>
+      <div class="form-inline text-xs-center">
+        <div class="form-group">
+          <div class="bg-light form-control square rounded-right px-2">Tel</div>
+        <input type="number" class="form-control" id="phone" v-model="currentPersonne.phone" />
       </div>
-      <div class="form-group">
-    <label for="id">Ville</label>
-        <input type="text" class="" id="city" v-model="currentPersonne.city" />
+    </div>
+     <div class="form-inline text-xs-center">
+        <div class="form-group">
+          <div class="bg-light form-control square rounded-right px-2">Ville</div>
+        <input type="text" class="form-control" id="city" v-model="currentPersonne.city" />
       </div>
+    </div>
   </div>
   <button class="btn btn-primary badge badge-danger mr-2"
       @click="deletePersonne"

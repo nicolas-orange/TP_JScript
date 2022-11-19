@@ -21,7 +21,7 @@ class PersonneDataService {
     return http.put("/entree", data);
   }
 
-  // A COMPLETER
+// function LinkFormatter(value, row, index) {return "<a href='"+/personnes/+currentPersonne.id"'>"+value+"</a>";}
 }
 
 export default new PersonneDataService();

@@ -1,109 +1,101 @@
+	
 <template>
-
- <div class="submit-form">
-    <div class="py-2 text-center">
-      <img class="d-block mx-auto mb-2 pull-right" src="https://www.imt.fr/wp-content/uploads/2021/08/logo-imtne.png" alt="">
-      <h2>Annuaire</h2>
-      <p class="lead">Formulaire d'ajout d'une personne</p>
-    <div v-if="currentPersonne">
-      <div class="form-group">
-    <label for="id">ID</label>
-        <input type="text" readonly class="formcontrol" id="id" v-model="currentPersonne.id" />
-      </div>
-      <div class="form-group">
-    <label for="name">Nom</label>
-        <input type="text" class="" id="name" v-model="currentPersonne.name" />
-      </div>
-      <div class="form-group">
-    <label for="id">Prenom</label>
-        <input type="text" class="" id="surname" v-model="currentPersonne.surname" />
-      </div>
-      <div class="form-group">
-    <label for="id">Tel</label>
-        <input type="text" class="" id="phone" v-model="currentPersonne.phone" />
-      </div>
-      <div class="form-group">
-    <label for="id">Ville</label>
-        <input type="text" class="" id="city" v-model="currentPersonne.city" />
-      </div>
-  </div>
+  <div class="submit-form">
 
     <div v-if="!submitted">
-      <button type="submit" class="btn btn-primary badge badge-success"
-      @click="creerPersonne">
-      Ajouter
-      </button>
-      <h4>Personne non ajoutée !</h4>
-      <button class="btn btn-failure" @click="resetForm">remise à zéro du formulaire</button>
+      <!-- A COMPLETER -->
+
+      <h2>Ajouter une nouvelle Personne</h2>
+      <div class="form-group">
+         <label for="name"> ID </label>  
+         <input type="number" class="form-control" id="id" v-model="personne.id">
+      </div>
+      <div class="form-group">
+         <label for="name"> Nom </label>  
+         <input type="text" class="form-control" id="name" v-model="personne.name">
+      </div>
+      <div class="form-group">
+         <label for="name"> Prénom </label>  
+         <input type="text" class="form-control" id="surname" v-model="personne.surname">
+      </div>
+      <div class="form-group">
+         <label for="name"> Téléphone </label>  
+         <input type="number" class="form-control" id="phone" v-model="personne.phone">
+      </div>
+      <div class="form-group">
+         <label for="name"> Ville </label>  
+         <input type="text" class="form-control" id="city" v-model="personne.city">
       </div>
 
-      <div v-else>
+
+      <button @click="creerPersonne" class="btn btn-success">Ajouter</button>
+      <p>{{ message }}</p>
+    </div>
+        
+    <div v-else>
       <h4>Personne ajoutée avec succès!</h4>
       <button class="btn btn-success" @click="resetForm">Ajouter une nouvelle personne</button>
-    <p>{{ message }}</p>
-      </div>
+      <!--  ajouter un bouton -->
+    </div>
   </div>
-</div>
-  
-  
 </template>
 
 <script>
-
 import PersonneDataService from "../services/PersonneDataService";
 
 export default {
-  name: "create",
+  name: "add-personne",
   data() {
     return {
-      currentPersonne: {
+      personne: {
         id: null,
         name: "",
         surname: "",
         phone: "",
-        city: "",
+        city: ""
       },
-      submitted: false
+      submitted: false,
+      message: "",
     };
   },
   methods: {
-
-  
-
     creerPersonne() {
-      var newpersonne = {
-        id: null,
-        name: this.currentPersonne.name,
-        surname: this.currentPersonne.surname,
-        phone: this.currentPersonne.phone,
-        city: this.currentPersonne.city,
+      var data = {
+        id: this.personne.id,
+        name: this.personne.name,
+        surname: this.personne.surname,
+        phone: this.personne.phone,
+        city: this.personne.city,
       };
-    
 
       // A COMPLETER
-  PersonneDataService.create(newpersonne)
+      PersonneDataService.create(data)
       .then(response => {
-        this.message = 'Personne créée avec succès!';
-        console.log(response.personne);
-        this.submitted = true;
-    })
+          console.log(response.data);
+          console.log("oui");
+          this.message = response.data;
+          this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+          console.log("non");
+          this.message = 'Id déja existant!';
+       
+      });
     },
     
     resetForm() {
       this.submitted = false;
       this.personne = {};
-    },
-  },
-    mounted() {
-    this.message = '';
-    this.getPersonne(this.$route.params.id);
+    }
   }
 };
 </script>
 
 <style>
 .submit-form {
-  max-width: 300px;
+  /*max-width: 300px;*/
+  max-width: 400px;
   margin: auto;
-};
+}
 </style>
