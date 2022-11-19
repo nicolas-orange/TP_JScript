@@ -8,7 +8,7 @@
       -->
       <h2>Annuaire<p class="lead">Formulaire d'édition d'une personne</p></h2>
 
-  
+    
     <div v-if="currentPersonne">
       <div class="form-inline text-center">
         <div class="form-group">
@@ -54,17 +54,7 @@
     <p>{{ message }}</p>
   
   </div>
-  </main>
-
-  
-    
-
-    <!-- A INCLURE DANS LE FORM -->
-    
-
-    <!-- A INCLURE DANS LE FORM -->
-  
-  
+  </main>  
 
 </div>
 
@@ -87,7 +77,7 @@ export default {
   methods: {
     getPersonne(id) {
       // A COMPLETER
-      PersonneDataService.get(id)
+    PersonneDataService.get(id)
     .then(response => {
           this.currentPersonne = response.data;
           console.log(response.data);
@@ -112,22 +102,22 @@ export default {
     });
     },
 
-    deletePersonne() {
+  deletePersonne() {
      // A COMPLETER
-     PersonneDataService.delete(this.currentPersonne.id)
-     .then(response => {
-   this.message = 'Personne supprimée avec succès!';
-   console.log('Personne supprimée avec succès !');
+    PersonneDataService.delete(this.currentPersonne.id)
+    .then(response => {
+    this.message = 'Personne supprimée avec succès!';
+    console.log('Personne supprimée avec succès !');
        
-     this.$router.push({ name: "ROUTE_VERS_LISTE_PERSONNES" });
-     console.log(response.data);
-    });
+    this.$router.push({ name: "ROUTE_VERS_LISTE_PERSONNES" });
+    console.log(response.data);
+  });
+},
+},
+  resetForm() {
+    this.submitted = false;
+    this.personne = {};
   },
-  },
-      resetForm() {
-      this.submitted = false;
-      this.personne = {};
-    },
   mounted() {
     this.message = '';
     this.getPersonne(this.$route.params.id);
